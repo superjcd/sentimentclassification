@@ -20,9 +20,9 @@ bc = BasicConfigs()
 parser = argparse.ArgumentParser()
 parser.add_argument('--compute-val', action='store_true', help='compute validation accuracy or not, default:None')
 parser.add_argument('--epoches', default=20, type=int, help='num of epoches for trainning loop, default:20')
-parser.add_argument('--load-model-dir', default= None, help='path for loadding model, default:None' )
-parser.add_argument('--save-model-dir', default=None, help='models_storage/model_cnn.pt, defaul:None')
-parser.add_argument('--model-name', default='textcnn',choices=['textcnn', 'birnn'], help='choose one model name for trainng')
+parser.add_argument('-lmd', '--load-model-dir', default= None, help='path for loadding model, default:None' )
+parser.add_argument('-smd', '--save-model-dir', default=None, help='models_storage/model_cnn.pt, defaul:None')
+parser.add_argument('--model-name', default='birnn',choices=['textcnn', 'birnn'], help='choose one model name for trainng')
 args = parser.parse_args()
 
 # 获取模型名称

@@ -4,9 +4,9 @@
 import pandas as pd
 import os
 import torch
+import argparse
 from utils import load_data_to_csv,  transform_data
-from model import textcnn, birnn
-
+import model
 from dataset import TEXT, LABEL
 
 
@@ -14,6 +14,15 @@ from dataset import TEXT, LABEL
 if not os.path.exists('data/test.csv'):
     load_data_to_csv(flag='test')
 
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--model-name', default='birnn',choices=['textcnn', 'birnn'], help='choose one model name for trainng')
+parser.add_argument('-lmd', '--load-model-dir', default= None, help='path for loadding model, default:None' )
+args = parser.parse_args()
+
+# 获取模型名称
+net = getattr(model, args.model_name)()
+net.load_state_dict(torch.load(args.load_model_dir))
 
 
 def evaluate(model, df):
@@ -32,8 +41,6 @@ def evaluate(model, df):
 
 
 if __name__ == '__main__':
-    net = textcnn()
-    net.load_state_dict(torch.load('models_storage/model_cnn.pt'))
     test_data = pd.read_csv('data/test.csv')
     evaluate(model=net, df=test_data)
 
