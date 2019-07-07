@@ -1,0 +1,5 @@
+torch
+torchtext
+pymysql
+pandas
+flask
