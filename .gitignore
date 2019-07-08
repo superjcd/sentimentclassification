@@ -1,3 +1,5 @@
 .vector_cache
 *.vec
 *.pt
+.idea
+.DS_Store
